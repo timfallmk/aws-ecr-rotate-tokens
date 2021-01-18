@@ -1,0 +1,18 @@
+apiVersion: v1
+appVersion: "1.4.3"
+description: This Chart seemlessly integrates Kubernetes with Multi AWS ECR
+name: aws-multi-ecr-credentials
+version: 1.4.3
+maintainers:
+- email: sanderua@protonmail.com
+  name: Sander
+- email: me@meenaalfons.com
+  name: Meena Alfons
+keywords:
+- aws ecr
+- private registry
+- imagePullSecrets
+- kubernetes
+sources:
+  - https://github.com/laviua/aws-multi-ecr-credentials
+  - https://github.com/architectminds/helm-charts/tree/master/charts/aws-ecr-credential
