@@ -2,7 +2,6 @@ apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
   name: {{ include "aws-multi-ecr-credentials.cronJob" . }}
-  namespace: {{ include "aws-multi-ecr-credentials.namespace" . }}
   labels:
 {{ include "aws-multi-ecr-credentials.labels" . | indent 4 }}
 spec:
@@ -53,13 +52,11 @@ spec:
               chmod +x kubectl
 
               #delete old secret
-              ./kubectl delete secret --namespace {{ .Values.targetNamespace }} aws-registry-{{ .Values.aws.account }} || true
+              ./kubectl delete secret aws-registry-{{ .Values.aws.account }} || true
 
               #create new secret (.dockerconfigjson)
-              ./kubectl create secret --namespace {{ .Values.targetNamespace }} docker-registry aws-registry-{{ .Values.aws.account }} \
+              ./kubectl create secret docker-registry aws-registry-{{ .Values.aws.account }} \
               --docker-server=$DOCKER_REGISTRY_SERVER \
               --docker-username=$DOCKER_USER \
               --docker-password=$DOCKER_PASSWORD \
-              --docker-email=no@email.local
-              ./kubectl patch serviceaccount default -p '{"imagePullSecrets":[{"name":"aws-registry-{{ .Values.aws.account }}"}]}'
-
+              ./kubectl patch serviceaccount {{ include "aws-multi-ecr-credentials.serviceAccount" . }} -p '{"imagePullSecrets":[{"name":"aws-registry-{{ .Values.aws.account }}"}]}'

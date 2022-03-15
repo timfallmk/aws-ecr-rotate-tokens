@@ -2,9 +2,9 @@
 {{/*
 Define resource names
 */}}
-{{- define "aws-multi-ecr-credentials.namespace" }}
-{{- default (printf "%s-ns" .Release.Name) -}}
-{{- end }}
+# {{- define "aws-multi-ecr-credentials.namespace" }}
+# {{- default (printf "%s-ns" .Release.Name) -}}
+# {{- end }}
 
 {{- define "aws-multi-ecr-credentials.serviceAccount" }}
 {{- default (printf "%s-account" .Release.Name) -}}

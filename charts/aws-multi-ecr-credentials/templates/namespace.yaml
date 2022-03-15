@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: {{ include "aws-multi-ecr-credentials.namespace" . }}
-  labels:
-{{ include "aws-multi-ecr-credentials.labels" . | indent 4 }}

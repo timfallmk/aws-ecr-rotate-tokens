@@ -1,5 +1,5 @@
 # targetNamespace is where the aws-registry secret will be created and maintained
-targetNamespace: default
+# targetNamespace: default
 
 # aws.account is the aws account number of the ECR (string)
 # aws.region is the aws region where the ECR exists
