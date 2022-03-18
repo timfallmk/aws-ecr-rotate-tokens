@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "aws-multi-ecr-credentials.name" -}}
+{{- define "aws-ecr-rotate-tokens.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "aws-multi-ecr-credentials.fullname" -}}
+{{- define "aws-ecr-rotate-tokens.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -27,16 +27,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "aws-multi-ecr-credentials.chart" -}}
+{{- define "aws-ecr-rotate-tokens.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
 {{/*
 Common labels
 */}}
-{{- define "aws-multi-ecr-credentials.labels" -}}
-app.kubernetes.io/name: {{ include "aws-multi-ecr-credentials.name" . }}
-helm.sh/chart: {{ include "aws-multi-ecr-credentials.chart" . }}
+{{- define "aws-ecr-rotate-tokens.labels" -}}
+app.kubernetes.io/name: {{ include "aws-ecr-rotate-tokens.name" . }}
+helm.sh/chart: {{ include "aws-ecr-rotate-tokens.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
@@ -48,9 +48,9 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Pod labels
 */}}
-{{- define "aws-multi-ecr-credentials.podLabels" -}}
-app.kubernetes.io/name: {{ include "aws-multi-ecr-credentials.name" . }}
-helm.sh/chart: {{ include "aws-multi-ecr-credentials.chart" . }}
+{{- define "aws-ecr-rotate-tokens.podLabels" -}}
+app.kubernetes.io/name: {{ include "aws-ecr-rotate-tokens.name" . }}
+helm.sh/chart: {{ include "aws-ecr-rotate-tokens.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}

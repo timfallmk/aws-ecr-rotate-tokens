@@ -12,18 +12,18 @@
 
 ## How to use?
 
-See internal: [README.md](charts/aws-multi-ecr-credentials/README.md)
+See internal: [README.md](charts/aws-ecr-rotate-tokens/README.md)
 
 ## How to debug?
 `kubectl get pods -A`
 
 you should see the pod name like this:
 
-`aws-multi-ecr-credentials-1234567890-ns   aws-multi-ecr-credentials-1234567890-cron-1610110080-x265d`
+`aws-ecr-rotate-tokens-1234567890-cron-1610110080-x265d`
 
 then need to read the logs by the following command:
 
-`kubectl logs -n aws-multi-ecr-credentials-1234567890-ns aws-multi-ecr-credentials-1234567890-cron-1610110080-x265d`
+`kubectl logs aws-ecr-rotate-tokens-1234567890-cron-1610110080-x265d`
 
 ## Build helm package
 ```

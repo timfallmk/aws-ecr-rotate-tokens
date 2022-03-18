@@ -1,8 +1,8 @@
-# aws-multi-ecr-credentials
+# aws-ecr-rotate-tokens
 
 ## Installation
 
 ```console
-helm repo add aws-multi-ecr-credentials https://laviua.github.io/aws-multi-ecr-credentials/
-helm search repo aws-multi-ecr-credentials
+helm repo add aws-ecr-rotate-tokens https://laviua.github.io/aws-ecr-rotate-tokens/
+helm search repo aws-ecr-rotate-tokens
 ```

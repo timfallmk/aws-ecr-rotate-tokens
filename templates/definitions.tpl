@@ -2,23 +2,23 @@
 {{/*
 Define resource names
 */}}
-# {{- define "aws-multi-ecr-credentials.namespace" }}
+# {{- define "aws-ecr-rotate-tokens.namespace" }}
 # {{- default (printf "%s-ns" .Release.Name) -}}
 # {{- end }}
 
-{{- define "aws-multi-ecr-credentials.serviceAccount" }}
+{{- define "aws-ecr-rotate-tokens.serviceAccount" }}
 {{- default (printf "%s-account" .Release.Name) -}}
 {{- end }}
 
-{{- define "aws-multi-ecr-credentials.job" }}
+{{- define "aws-ecr-rotate-tokens.job" }}
 {{- default (printf "%s-job" .Release.Name) -}}
 {{- end }}
 
-{{- define "aws-multi-ecr-credentials.cronJob" }}
+{{- define "aws-ecr-rotate-tokens.cronJob" }}
 {{- default (printf "%s-cron" .Release.Name) -}}
 {{- end }}
 
-{{- define "aws-multi-ecr-credentials.secret" }}
+{{- define "aws-ecr-rotate-tokens.secret" }}
 {{- default (printf "%s-secret" .Release.Name) -}}
 {{- end }}
 

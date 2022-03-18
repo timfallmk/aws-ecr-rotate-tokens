@@ -1,9 +1,9 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: {{ include "aws-multi-ecr-credentials.cronJob" . }}
+  name: {{ include "aws-ecr-rotate-tokens.cronJob" . }}
   labels:
-{{ include "aws-multi-ecr-credentials.labels" . | indent 4 }}
+{{ include "aws-ecr-rotate-tokens.labels" . | indent 4 }}
 spec:
   schedule: "{{ .Values.cron }}"
   successfulJobsHistoryLimit: 2
@@ -14,9 +14,9 @@ spec:
       template:
         metadata:
           labels:
-{{ include "aws-multi-ecr-credentials.podLabels" . | indent 12 }}
+{{ include "aws-ecr-rotate-tokens.podLabels" . | indent 12 }}
         spec:
-          serviceAccountName: {{ include "aws-multi-ecr-credentials.serviceAccount" . }}
+          serviceAccountName: {{ include "aws-ecr-rotate-tokens.serviceAccount" . }}
           terminationGracePeriodSeconds: 0
           restartPolicy: Never
           containers:
@@ -27,13 +27,13 @@ spec:
               - name: AWS_ACCESS_KEY_ID
                 valueFrom:
                   secretKeyRef:
-                    name: {{ include "aws-multi-ecr-credentials.secret" . }}
+                    name: {{ include "aws-ecr-rotate-tokens.secret" . }}
                     key: AWS_ACCESS_KEY_ID
 
               - name: AWS_SECRET_ACCESS_KEY
                 valueFrom:
                   secretKeyRef:
-                    name: {{ include "aws-multi-ecr-credentials.secret" . }}
+                    name: {{ include "aws-ecr-rotate-tokens.secret" . }}
                     key: AWS_SECRET_ACCESS_KEY
 
             command:
@@ -41,7 +41,6 @@ spec:
             - "-c"
             - |
               set -e #stop script because of error
-              set -x
 
               #fetching docker password
               DOCKER_REGISTRY_SERVER=https://{{ .Values.aws.account }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com
@@ -61,4 +60,4 @@ spec:
               --docker-username=$DOCKER_USER \
               --docker-password=$DOCKER_PASSWORD
               
-              ./kubectl patch serviceaccount {{ include "aws-multi-ecr-credentials.serviceAccount" . }} -p '{"imagePullSecrets":[{"name":"aws-registry-{{ .Values.aws.account }}"}]}'
+              ./kubectl patch serviceaccount {{ include "aws-ecr-rotate-tokens.serviceAccount" . }} -p '{"imagePullSecrets":[{"name":"aws-registry-{{ .Values.aws.account }}"}]}'
